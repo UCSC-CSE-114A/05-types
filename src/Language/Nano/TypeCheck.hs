@@ -19,7 +19,8 @@ typeOfString s = typeOfExpr (parseExpr s)
 typeOfExpr :: Expr -> IO Type
 typeOfExpr e = do
   let (!st, t) = infer initInferState preludeTypes e
-  return t
+  if (length (stSub st)) < 0 then throw (Error ("count Negative: " ++ show (stCnt st)))
+  else return t
 
 --------------------------------------------------------------------------------
 -- Problem 1: Warm-up
