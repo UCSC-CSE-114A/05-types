@@ -32,7 +32,6 @@ with suitable Haskell implementations.
 
 ## Assignment Testing and Evaluation
 
-Your functions/programs **must** compile and run on `ieng6.ucsd.edu`.
 
 Most of the points, will be awarded automatically, by
 **evaluating your functions against a given test suite**.
@@ -71,17 +70,7 @@ but you will not be graded on this.
 
 ## Submission Instructions
 
-To submit your code, just do:
-
-```bash
-$ make turnin
-```
-
-`turnin` will provide you with a confirmation of the
-submission process; make sure that the size of the file
-indicated by `turnin` matches the size of your file.
-See the ACS Web page on [turnin](http://acs.ucsd.edu/info/turnin.php)
-for more information on the operation of the program.
+Please commit all your code to gitlab, and indicate in your canvas submission your commit ID and your partner. We will be grading the code from gitlab, so ensure what you add to gitlab is what you want graded. 
 
 ## Data Structures and Overview
 
