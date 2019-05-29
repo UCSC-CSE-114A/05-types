@@ -179,7 +179,7 @@ When you are done you should get the following behavior:
 >>> freeTVars (TVar "a")
 ["a"]
 
->>> freeTVars (forall "a" (list "a" :=> "a"))
+>>> freeTVars (forall "a" (list (TVar "a") :=> (TVar "a"))
 []
 ```
 
