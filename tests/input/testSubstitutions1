@@ -1,0 +1,2 @@
+top = 
+  lookupTVar "g" [("g", TBool), ("a", TInt)]
