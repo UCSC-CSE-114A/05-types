@@ -1,6 +1,6 @@
 # Assignment 5: Nano Types (240 points)
 
-## Due by Wednesday 12/4 by 11:59pm
+## Due by Wednesday 6/5 by 11:59pm
 
 
 ## Overview
@@ -179,7 +179,7 @@ When you are done you should get the following behavior:
 >>> freeTVars (TVar "a")
 ["a"]
 
->>> freeTVars (forall "a" (list (TVar "a") :=> (TVar "a"))
+>>> freeTVars (forall "a" (list "a" :=> "a"))
 []
 ```
 
