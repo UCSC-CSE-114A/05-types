@@ -91,6 +91,7 @@ unit sc = testGroup "NANO"
     -- failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
 
     fileTest (f, r, n)  = scoreTest' sc (Nano.typeOfFile, f, r, n, "file: " ++ f)
+    fileTestFn (f, r, n, func) = scoreTest' sc (func, f, r, n, "file: " ++ f)
     fileTestE (f, e, n) = scoreTest' sc (expectError e Nano.typeOfFile, f, True, n, "file: " ++ f)
 
 
