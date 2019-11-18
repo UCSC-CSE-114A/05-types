@@ -81,7 +81,15 @@ unit sc = testGroup "NANO"
               , 3 )                            
   , fileTestE  ( "tests/input/t23.hs"
               , "type error"
-              , 3 )                            
+              , 3 )
+  , fileTestFn ( "tests/input/testSubstitution1.hs"
+               , Nano.lookupTVar
+               , Nano.TBool
+               , 1 )
+  , fileTestFn ( "tests/input/testSubstitution2.hs"
+               , Nano.apply
+               , "Int => [Int]"
+               , 1 )
   ]
   where
     -- scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
@@ -91,7 +99,7 @@ unit sc = testGroup "NANO"
     -- failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
 
     fileTest (f, r, n)  = scoreTest' sc (Nano.typeOfFile, f, r, n, "file: " ++ f)
-    fileTestFn (f, r, n, func) = scoreTest' sc (func, f, r, n, "file: " ++ f)
+    fileTestFn (f, func, r, n) = scoreTest' sc (func, f, r, n, "file: " ++ f)
     fileTestE (f, e, n) = scoreTest' sc (expectError e Nano.typeOfFile, f, True, n, "file: " ++ f)
 
 
