@@ -88,6 +88,9 @@ unit sc = testGroup "NANO"
               , Nano.TInt
               , 2 )
   -- end 3b tests
+  , fileTest  ( "tests/input/t5.hs"
+              , Nano.TInt
+              , 2 )
   , fileTestE  ( "tests/input/t8.hs"
               , "type error"
               , 1 )
@@ -102,9 +105,6 @@ unit sc = testGroup "NANO"
               , 1 )
   , fileTest  ( "tests/input/t12.hs"
               , Nano.TInt :=> Nano.TInt
-              , 2 )
-  , fileTest  ( "tests/input/t13.hs"
-              , Nano.TInt
               , 2 )
   , fileTestE  ( "tests/input/t14.hs"
               , "type error"
