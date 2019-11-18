@@ -16,8 +16,44 @@ parse = Nano.parse
 
 unit :: Score -> TestTree
 unit sc = testGroup "NANO"
-  [ -- 2a tests
-    scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
+  [ --1a tests
+    scoreTest ( Nano.freeTVars
+              , (TVar "a")
+              , ["a"]
+              , 1 -- points for this test case
+              , "freeTVars 1")
+  , scoreTest ( Nano.freeTVars
+              , (TList (TList (TVar "a")))
+              , ["a"]
+              , 1
+              , "freeTVars 2")
+  , scoreTest ( Nano.freeTVars
+              , (TVar "a" :=> TVar "b")
+              , ["a", "b"]
+              , 1
+              , "freeTVars 3")
+  , scoreTest ( Nano.freeTVars
+              , (TVar "a" :=> TVar "a")
+              , ["a"]
+              , 1
+              , "freeTVars 4")
+  , scoreTest ( Nano.freeTVars
+              , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "b")))
+              , ["b"]
+              , 1
+              , "freeTVars 5")
+  , scoreTest ( Nano.freeTVars
+              , (TInt)
+              , []
+              , 1
+              , "freeTVars 6")
+   , scoreTest ( Nano.freeTVars
+              , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "a")))
+              , []
+              , 1
+              , "freeTVars 7")
+     -- 2a tests
+   , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("a", Nano.TInt)
               , [("a", Nano.TInt)]
               , 1
