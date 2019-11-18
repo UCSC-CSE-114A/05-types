@@ -53,24 +53,24 @@ unit sc = testGroup "NANO"
               , 1
               , "freeTVars 7")
    -- 1b tests
-   , scoreTest ( Nano.lookupTVar
-               , (TVar "g") [(TVar "g", TBool), (TVar "a", TInt)]
+   , scoreTest ( uncurry Nano.lookupTVar
+               , ("g", [("g", TBool), ("a", TInt)])
                , TBool
                , 1 
                , "part 1b test 1" )
-  , scoreTest ( Nano.removeTVar
-               , (TVar "a") [(TVar "a", TInt), (TVar "b", TBool)]
-               , [(TVar "b", TBool)]
+  , scoreTest ( uncurry Nano.removeTVar
+               , ("a",[("a", TInt), ("b", TBool)])
+               , [("b", TBool)]
                , 1
                , "part 1b test 2" )
-  , scoreTest ( Nano.apply
-               , [(TVar "a", TBool), (TVar "b", TList)] (TVar "b" :=> TVar "a")
+  , scoreTest ( Nano.apply [("a", TList (TInt)), ("b", TInt)]
+               , TVar "b" :=> TVar "a"
                , TInt :=> TList (TInt)
                , 1 
                , "part 1b test 3" )
-  , scoreTest ( Nano.extendSubst
-               , [(TVar "a", TInt)] (TVar "b") (Tlist (TVar "a"))
-               , [(TVar "b", TList (TInt)), (TVar "a", TInt)]
+  , scoreTest ( uncurry (Nano.extendSubst [("a", TInt)])
+               , ("b", (TList (TVar "a")))
+               , [("b", TList (TInt)), ("a", TInt)]
                , 1
                , "part 1b test 4" )
    -- 2a tests
