@@ -81,16 +81,39 @@ unit sc = testGroup "NANO"
               , 3 )                            
   , fileTestE  ( "tests/input/t23.hs"
               , "type error"
-              , 3 )                            
+              , 3 )
+  -- 2b tests
+  , scoreTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt, Nano.TInt)
+              , []
+              , 1
+              , "unify test 1" )
+  , failTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt, Nano.TBool)
+              , "type error"
+              , 1
+              , "unify test 2" )
+  , scoreTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt Nano.:=> Nano.TInt, "a" Nano.:=> "a")
+              , [("a", Nano.TInt)]
+              , 1
+              , "unify test 3" )
+  , failTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt, Nano.TInt Nano.:=> Nano.TInt)
+              , "type error"
+              , 1
+              , "unify test 4" )
+  -- end 2b tests
   ]
   where
-    -- scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
-    -- scoreTest (f, x, r, n, msg) = scoreTest' sc (return . f, x, r, n, msg)
+    scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
+    scoreTest (f, x, r, n, msg) = scoreTest' sc (return . f, x, r, n, msg)
 
-    -- failTest :: (Show b, Eq b) => (a -> b, a, String, Int, String) -> TestTree
-    -- failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
+    failTest :: (Show b, Eq b) => (a -> b, a, String, Int, String) -> TestTree
+    failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
 
     fileTest (f, r, n)  = scoreTest' sc (Nano.typeOfFile, f, r, n, "file: " ++ f)
+    fileTestFn (f, func, r, n) = scoreTest' sc (func, f, r, n, "file: " ++ f)
     fileTestE (f, e, n) = scoreTest' sc (expectError e Nano.typeOfFile, f, True, n, "file: " ++ f)
 
 
