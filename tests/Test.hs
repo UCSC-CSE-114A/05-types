@@ -16,7 +16,42 @@ parse = Nano.parse
 
 unit :: Score -> TestTree
 unit sc = testGroup "NANO"
-  [ fileTest  ( "tests/input/t1.hs"
+  [ scoreTest ( Nano.freeTVars
+              , (TVar "a")
+              , ["a"]
+              , 1 -- points for this test case
+              , "freeTVars 1")
+  , scoreTest ( Nano.freeTVars
+              , (TList (TList (TVar "a")))
+              , ["a"]
+              , 1
+              , "freeTVars 2")
+  , scoreTest ( Nano.freeTVars
+              , (TVar "a" :=> TVar "b")
+              , ["a", "b"]
+              , 1
+              , "freeTVars 3")
+  , scoreTest ( Nano.freeTVars
+              , (TVar "a" :=> TVar "a")
+              , ["a"]
+              , 1
+              , "freeTVars 4")
+  , scoreTest ( Nano.freeTVars
+              , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "b")))
+              , ["b"]
+              , 1
+              , "freeTVars 5")
+  , scoreTest ( Nano.freeTVars
+              , (TInt)
+              , []
+              , 1
+              , "freeTVars 6")
+   , scoreTest ( Nano.freeTVars
+              , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "a")))
+              , []
+              , 1
+              , "freeTVars 7")
+  , fileTest  ( "tests/input/t1.hs"
               , Nano.TBool
               , 1 )
   , fileTest  ( "tests/input/t2.hs"
@@ -84,11 +119,11 @@ unit sc = testGroup "NANO"
               , 3 )                            
   ]
   where
-    -- scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
-    -- scoreTest (f, x, r, n, msg) = scoreTest' sc (return . f, x, r, n, msg)
+    scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
+    scoreTest (f, x, r, n, msg) = scoreTest' sc (return . f, x, r, n, msg)
 
-    -- failTest :: (Show b, Eq b) => (a -> b, a, String, Int, String) -> TestTree
-    -- failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
+    failTest :: (Show b, Eq b) => (a -> b, a, String, Int, String) -> TestTree
+    failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
 
     fileTest (f, r, n)  = scoreTest' sc (Nano.typeOfFile, f, r, n, "file: " ++ f)
     fileTestE (f, e, n) = scoreTest' sc (expectError e Nano.typeOfFile, f, True, n, "file: " ++ f)
