@@ -11,10 +11,10 @@ import           Control.Exception (throw)
 
 --------------------------------------------------------------------------------
 typeOfFile :: FilePath -> IO Type
-typeOfFile f = readFile f >>= typeOfString
+typeOfFile f = parseFile f >>= typeOfExpr
 
 typeOfString :: String -> IO Type
-typeOfString s = typeOfExpr (parseExpr s)
+typeOfString s = typeOfExpr (parseString s)
 
 typeOfExpr :: Expr -> IO Type
 typeOfExpr e = do
