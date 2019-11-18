@@ -365,8 +365,6 @@ If all unification steps succeed, `infer` returns the inferred type of `e` and a
 
 In this part, you can assume that the type environment maps all variables to mono-types, i.e. `Mono t`.
 
-When you are done, and replace `Lexer.x` and `Parser.y` with a working lexer and parser from HW4,
-your code should pass the first 5 test cases.
 In particular, you should observe the following behavior:
 
 ```haskell
@@ -382,9 +380,6 @@ Int
 >>> typeOfString "(\\x -> x + 1) True"
 *** Exception: Error {errMsg = "type error: cannot unify Int and Bool"}
 ```
-
-**Note:** if you don't have a working Nano parser yet, use the function `typeOfExpr` instead and write ASTs by hand.
-
 
 ### (b) Polymorphism: 50 points
 
@@ -455,8 +450,6 @@ Fill in the types of built-in functions inside `preludeTypes`
 (we have pre-filled the one for `+`).
 Remember that you are not allowed to use `a0, a1, ...` as bound type variables,
 since those are reserved for use as free type variables by the algorithm.
-
-At this point the first 18 tests should pass.
 
 ### (d) Recursion: 30 points
 
