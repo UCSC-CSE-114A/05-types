@@ -90,6 +90,9 @@ unit sc = testGroup "NANO"
                , Nano.apply
                , "Int => [Int]"
                , 1 )
+  , fileTestFn ("tests/input/testSubstitution3.hs"
+               , Nano.extendSubst
+               , [("a",Int)]
   ]
   where
     -- scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
