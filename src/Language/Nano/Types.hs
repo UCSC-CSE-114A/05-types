@@ -84,7 +84,7 @@ instance IsString Type where
   fromString = TVar
   
 data Poly = Mono Type 
-          | Forall TVar Poly
+          | Forall TVar Poly deriving Eq
           
 -- Convenience function to create a list type           
 list :: Type -> Type

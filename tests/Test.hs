@@ -3,7 +3,7 @@
 import Control.Exception
 import Test.Tasty
 import Common
-import Data.List (isInfixOf)
+import Data.List (isInfixOf, sort)
 import qualified Language.Nano.Types     as Nano
 import           Language.Nano.Types ( Type(..) )
 import qualified Language.Nano.Eval      as Nano
@@ -51,6 +51,21 @@ unit sc = testGroup "NANO"
   , fileTest  ( "tests/input/t5.hs"
               , Nano.TInt
               , 1 )
+  , scoreTest ( uncurry Nano.generalize
+              , ([], ((Nano.TVar "a") Nano.:=> (Nano.TVar "a")))
+              , Nano.Forall "a" $ Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "a")
+              , 5
+              , "generalize test 1")
+  , scoreTest ( uncurry Nano.generalize
+              , ([("x", Nano.Mono $ Nano.TVar "a")], ((Nano.TVar "a") Nano.:=> (Nano.TVar "a")))
+              , Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "a")
+              , 5
+              , "generalize test 2")
+  , scoreTest ( sort . boundVars . uncurry Nano.generalize
+              , ([], ((Nano.TVar "a") Nano.:=> ((Nano.TVar "b") Nano.:=> (Nano.TVar "c"))))
+              , ["a","b","c"]
+              , 5
+              , "generalize test 3")
   , fileTest  ( "tests/input/t6.hs"
               , Nano.TBool
               , 1 )
@@ -112,6 +127,10 @@ unit sc = testGroup "NANO"
 
     fileTest (f, r, n)  = scoreTest' sc (Nano.typeOfFile, f, r, n, "file: " ++ f)
     fileTestE (f, e, n) = scoreTest' sc (expectError e Nano.typeOfFile, f, True, n, "file: " ++ f)
+
+    boundVars :: Nano.Poly -> [String]
+    boundVars (Nano.Mono _) = []
+    boundVars (Nano.Forall v t) = v:boundVars t
 
 
 expectError :: (Show b) => String -> (a -> IO b) -> a -> IO Bool
