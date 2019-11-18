@@ -16,7 +16,7 @@ parse = Nano.parse
 
 unit :: Score -> TestTree
 unit sc = testGroup "NANO"
-  [ --1a tests
+  [ -- 1a tests
     scoreTest ( Nano.freeTVars
               , (TVar "a")
               , ["a"]
@@ -52,6 +52,27 @@ unit sc = testGroup "NANO"
               , []
               , 1
               , "freeTVars 7")
+   -- 1b tests
+   , scoreTest ( Nano.lookupTVar
+               , (TVar "g") [(TVar "g", TBool), (TVar "a", TInt)]
+               , TBool
+               , 1 
+               , "part 1b test 1" )
+  , scoreTest ( Nano.removeTVar
+               , (TVar "a") [(TVar "a", TInt), (TVar "b", TBool)]
+               , [(TVar "b", TBool)]
+               , 1
+               , "part 1b test 2" )
+  , scoreTest ( Nano.apply
+               , [(TVar "a", TBool), (TVar "b", TList)] (TVar "b" :=> TVar "a")
+               , TInt :=> TList (TInt)
+               , 1 
+               , "part 1b test 3" )
+  , scoreTest ( Nano.extendSubst
+               , [(TVar "a", TInt)] (TVar "b") (Tlist (TVar "a"))
+               , [(TVar "b", TList (TInt)), (TVar "a", TInt)]
+               , 1
+               , "part 1b test 4" )
    -- 2a tests
    , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("a", Nano.TInt)
@@ -197,26 +218,6 @@ unit sc = testGroup "NANO"
   , fileTestE  ( "tests/input/3dtest5.hs"
               , "type error"
               , 3 )
-  , scoreTest ( Nano.lookupTVar
-               , (TVar "g") [(TVar "g", TBool), (TVar "a", TInt)]
-               , TBool
-               , 1 
-               , "part 1b test 1" )
-  , scoreTest ( Nano.removeTVar
-               , (TVar "a") [(TVar "a", TInt), (TVar "b", TBool)]
-               , [(TVar "b", TBool)]
-               , 1
-               , "part 1b test 2" )
-  , scoreTest ( Nano.apply
-               , [(TVar "a", TBool), (TVar "b", TList)] (TVar "b" :=> TVar "a")
-               , TInt :=> TList (TInt)
-               , 1 
-               , "part 1b test 3" )
-  , scoreTest ( Nano.extendSubst
-               , [(TVar "a", TInt)] (TVar "b") (Tlist (TVar "a"))
-               , [(TVar "b", TList (TInt)), (TVar "a", TInt)]
-               , 1
-               , "part 1b test 4" )
   ]
   where
     scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
