@@ -21,21 +21,22 @@ Library
                       FlexibleInstances
 
   -- other-extensions:
-  build-depends:       base,
-                       array,
-                       mtl
+  build-depends:       array,
+                       base,
+                       mtl,
+                       parser-combinators,
+                       text,
+                       megaparsec
 
   hs-source-dirs:      src
   default-language:    Haskell2010
-  build-tools:         alex, happy
-  other-modules:       Language.Nano.Lexer
 
 executable nano
   build-depends:       base,
                        haskeline,
+                       hw5-types,
                        mtl,
-                       transformers,
-                       hw5-types
+                       transformers
   default-language:    Haskell2010
   main-is:             bin/Main.hs
   Default-Extensions: OverloadedStrings,
