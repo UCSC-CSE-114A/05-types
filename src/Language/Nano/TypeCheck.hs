@@ -98,7 +98,7 @@ extendSubst sub a t = error "TBD: extendSubst"
 data InferState = InferState { 
     stSub :: Subst -- ^ current substitution
   , stCnt :: Int   -- ^ number of fresh type variables generated so far
-} deriving Show
+} deriving (Eq,Show)
 
 -- | Initial state: empty substitution; 0 type variables
 initInferState = InferState [] 0

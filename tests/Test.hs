@@ -16,7 +16,27 @@ parse = Nano.parse
 
 unit :: Score -> TestTree
 unit sc = testGroup "NANO"
-  [ fileTest  ( "tests/input/t1.hs"
+  [ scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
+              , ("a", Nano.TInt)
+              , [("a", Nano.TInt)]
+              , 5
+              , "unifyTVar test 1")
+  , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
+              , ("c", Nano.TList (Nano.TVar "d"))
+              , [("c", Nano.TList (Nano.TVar "d"))]
+              , 5
+              , "unifyTVar test 2")
+  , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
+              , ("b", Nano.TVar "b")
+              , []
+              , 5
+              , "unifyTVar test 3" )
+  , failTest  ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
+              , ("d", (Nano.TVar "a") Nano.:=> (Nano.TVar "d"))
+              , "type error"
+              , 5
+              , "unifyTVar test 4")
+  , fileTest  ( "tests/input/t1.hs"
               , Nano.TBool
               , 1 )
   , fileTest  ( "tests/input/t2.hs"
@@ -84,11 +104,11 @@ unit sc = testGroup "NANO"
               , 3 )                            
   ]
   where
-    -- scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
-    -- scoreTest (f, x, r, n, msg) = scoreTest' sc (return . f, x, r, n, msg)
+    scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
+    scoreTest (f, x, r, n, msg) = scoreTest' sc (return . f, x, r, n, msg)
 
-    -- failTest :: (Show b, Eq b) => (a -> b, a, String, Int, String) -> TestTree
-    -- failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
+    failTest :: (Show b, Eq b) => (a -> b, a, String, Int, String) -> TestTree
+    failTest (f, x, err, n, msg) = scoreTest' sc (expectError err (return . f), x, True, n, msg)
 
     fileTest (f, r, n)  = scoreTest' sc (Nano.typeOfFile, f, r, n, "file: " ++ f)
     fileTestE (f, e, n) = scoreTest' sc (expectError e Nano.typeOfFile, f, True, n, "file: " ++ f)
