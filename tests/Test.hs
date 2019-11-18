@@ -87,16 +87,21 @@ unit sc = testGroup "NANO"
                , TBool
                , 1 
                , "part 1b test 1" )
+  , scoreTest ( Nano.removeTVar
+               , (TVar "a") [(TVar "a", TInt), (TVar "b", TBool)]
+               , [(TVar "b", TBool)]
+               , 1
+               , "part 1b test 2" )
   , scoreTest ( Nano.apply
                , [(TVar "a", TBool), (TVar "b", TList)] (TVar "b" :=> TVar "a")
                , TInt :=> TList (TInt)
                , 1 
-               , "part 1b test 2" )
+               , "part 1b test 3" )
   , scoreTest ( Nano.extendSubst
                , [(TVar "a", TInt)] (TVar "b") (Tlist (TVar "a"))
                , [(TVar "b", TList (TInt)), (TVar "a", TInt)]
                , 1
-               , "part 1b test 3" )
+               , "part 1b test 4" )
   ]
   where
     scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
