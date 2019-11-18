@@ -15,12 +15,12 @@ import Language.Nano.Parser
 --------------------------------------------------------------------------------
 execFile :: FilePath -> IO Value
 --------------------------------------------------------------------------------
-execFile f = (readFile f >>= execString) `catch` exitError
+execFile f = (parseFile f >>= execExpr) `catch` exitError
 
 --------------------------------------------------------------------------------
 execString :: String -> IO Value
 --------------------------------------------------------------------------------
-execString s = execExpr (parseExpr s) `catch` exitError
+execString s = execExpr (parseString s) `catch` exitError
 
 --------------------------------------------------------------------------------
 execExpr :: Expr -> IO Value
@@ -86,7 +86,7 @@ execExpr e = return (eval prelude e) `catch` exitError
 --------------------------------------------------------------------------------
 parse :: String -> Expr
 --------------------------------------------------------------------------------
-parse = parseExpr
+parse = parseString
 
 exitError :: Error -> IO Value
 exitError (Error msg) = return (VErr msg)
