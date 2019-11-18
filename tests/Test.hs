@@ -52,38 +52,59 @@ unit sc = testGroup "NANO"
               , []
               , 1
               , "freeTVars 7")
-     -- 2a tests
+   -- 2a tests
    , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("a", Nano.TInt)
               , [("a", Nano.TInt)]
               , 1
-              , "unifyTVar test 1")
+              , "unifyTVar 1")
   , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("c", Nano.TList (Nano.TVar "d"))
               , [("c", Nano.TList (Nano.TVar "d"))]
               , 1
-              , "unifyTVar test 2")
+              , "unifyTVar 2")
   , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("b", Nano.TVar "b")
               , []
               , 1
-              , "unifyTVar test 3" )
+              , "unifyTVar 3" )
   , failTest  ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("d", (Nano.TVar "a") Nano.:=> (Nano.TVar "d"))
               , "type error"
               , 1
-              , "unifyTVar test 4")
-  -- end 2a tests
-  , fileTest  ( "tests/input/t1.hs"
+              , "unifyTVar 4")
+  -- 2b tests
+  , scoreTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt, Nano.TInt)
+              , []
+              , 1
+              , "unify 1" )
+  , failTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt, Nano.TBool)
+              , "type error"
+              , 1
+              , "unify 2" )
+  , scoreTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt Nano.:=> Nano.TInt, "a" Nano.:=> "a")
+              , [("a", Nano.TInt)]
+              , 1
+              , "unify 3" )
+  , failTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
+              , (Nano.TInt, Nano.TInt Nano.:=> Nano.TInt)
+              , "type error"
+              , 1
+              , "unify 4" )
+  -- 3a tests
+  , fileTest  ( "tests/input/3atest1.hs"
               , Nano.TBool
               , 1 )
-  , fileTest  ( "tests/input/t2.hs"
+  , fileTest  ( "tests/input/3atest2.hs"
               , Nano.TInt
               , 1 )
-  , fileTest  ( "tests/input/t3.hs"
+  , fileTest  ( "tests/input/3atest3.hs"
               , Nano.TInt
               , 1 )
-  , fileTest ( "tests/input/t4.hs"
+  , fileTest ( "tests/input/3atest4.hs"
               , Nano.TInt
               , 1 )
   -- 3b tests
@@ -91,109 +112,91 @@ unit sc = testGroup "NANO"
               , ([], ((Nano.TVar "a") Nano.:=> (Nano.TVar "a")))
               , Nano.Forall "a" $ Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "a")
               , 1
-              , "generalize test 1")
+              , "generalize 1")
   , scoreTest ( uncurry Nano.generalize
               , ([("x", Nano.Mono $ Nano.TVar "a")], ((Nano.TVar "a") Nano.:=> (Nano.TVar "a")))
               , Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "a")
               , 1
-              , "generalize test 2")
+              , "generalize 2")
   , scoreTest ( sort . boundVars . uncurry Nano.generalize
               , ([], ((Nano.TVar "a") Nano.:=> ((Nano.TVar "b") Nano.:=> (Nano.TVar "c"))))
               , ["a","b","c"]
               , 1
-              , "generalize test 3")
+              , "generalize 3")
   , scoreTest ( uncurry Nano.instantiate
               , (2, Nano.Forall "h" $ Nano.Mono $ Nano.TList (Nano.TVar "h"))
               , (3, Nano.TList (Nano.TVar "a2"))
               , 1
-              , "instantiate test 1")
+              , "instantiate 1")
   , scoreTest ( uncurry Nano.instantiate
               , (2, Nano.Forall "a" $ Nano.Forall "b" $ Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "b"))
               , (4, (Nano.TVar "a2") Nano.:=> (Nano.TVar "a3"))
               , 1
-              , "instantiate test 2")
+              , "instantiate 2")
   , scoreTest ( uncurry Nano.instantiate
               , (2, Nano.Forall "a" $ Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "b"))
               , (3, (Nano.TVar "a2") Nano.:=> (Nano.TVar "b"))
               , 1
-              , "instantiate test 3")
-  , fileTest  ( "tests/input/t3b1.hs"
+              , "instantiate 3")
+  , fileTest  ( "tests/input/3btest1.hs"
               , Nano.TBool
               , 2 )
-  , fileTest  ( "tests/input/t3b2.hs"
+  , fileTest  ( "tests/input/3btest2.hs"
               , Nano.TInt
               , 2 )
-  -- end 3b tests
-  , fileTest  ( "tests/input/t5.hs"
+  -- 3c tests
+  , fileTest  ( "tests/input/3ctest1.hs"
               , Nano.TInt
-              , 2 )
-  , fileTestE  ( "tests/input/t8.hs"
-              , "type error"
               , 1 )
-  , fileTestE  ( "tests/input/t9.hs"
-              , "type error"
-              , 1 )
-  , fileTest  ( "tests/input/t10.hs"
+  , fileTest  ( "tests/input/3ctest2.hs"
               , Nano.TBool
               , 1 )
-  , fileTestE  ( "tests/input/t11.hs"
+  , fileTestE  ( "tests/input/3ctest3.hs"
               , "type error"
               , 1 )
-  , fileTest  ( "tests/input/t12.hs"
+  , fileTestE  ( "tests/input/3ctest4.hs"
+              , "type error"
+              , 1 )
+  , fileTest  ( "tests/input/3ctest5.hs"
+              , Nano.TBool
+              , 1 )
+  , fileTestE  ( "tests/input/3ctest6.hs"
+              , "type error"
+              , 1 )
+  , fileTest  ( "tests/input/3ctest7.hs"
               , Nano.TInt :=> Nano.TInt
               , 2 )
-  , fileTestE  ( "tests/input/t14.hs"
+  , fileTestE  ( "tests/input/3ctest8.hs"
               , "type error"
               , 1 )
-  , fileTest  ( "tests/input/t15.hs"
+  , fileTest  ( "tests/input/3ctest9.hs"
               , Nano.TInt :=> Nano.TInt
               , 2 )
-  , fileTest  ( "tests/input/t16.hs"
+  , fileTest  ( "tests/input/3ctest10.hs"
               , Nano.TInt
               , 2 )
-  , fileTest  ( "tests/input/t17.hs"
+  , fileTest  ( "tests/input/3ctest11.hs"
               , Nano.TInt
               , 1 )
-  , fileTestE  ( "tests/input/t18.hs"
+  , fileTestE  ( "tests/input/3ctest12.hs"
               , "type error"
-              , 1 )              
-  , fileTest  ( "tests/input/t19.hs"
+              , 1 )
+  -- 3d tests
+  , fileTest  ( "tests/input/3dtest1.hs"
               , Nano.TList Nano.TInt
               , 2 )
-  , fileTest  ( "tests/input/t20.hs"
+  , fileTest  ( "tests/input/3dtest2.hs"
               , Nano.TInt
               , 2 )
-  , fileTestE  ( "tests/input/t21.hs"
+  , fileTestE  ( "tests/input/3dtest3.hs"
               , "type error"
               , 2 )                            
-  , fileTestE  ( "tests/input/t22.hs"
+  , fileTestE  ( "tests/input/3dtest4.hs"
               , "type error"
               , 3 )                            
-  , fileTestE  ( "tests/input/t23.hs"
+  , fileTestE  ( "tests/input/3dtest5.hs"
               , "type error"
               , 3 )
-  -- 2b tests
-  , scoreTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
-              , (Nano.TInt, Nano.TInt)
-              , []
-              , 1
-              , "unify test 1" )
-  , failTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
-              , (Nano.TInt, Nano.TBool)
-              , "type error"
-              , 1
-              , "unify test 2" )
-  , scoreTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
-              , (Nano.TInt Nano.:=> Nano.TInt, "a" Nano.:=> "a")
-              , [("a", Nano.TInt)]
-              , 1
-              , "unify test 3" )
-  , failTest ( Nano.stSub . uncurry (Nano.unify Nano.initInferState)
-              , (Nano.TInt, Nano.TInt Nano.:=> Nano.TInt)
-              , "type error"
-              , 1
-              , "unify test 4" )
-  -- end 2b tests
   ]
   where
     scoreTest :: (Show b, Eq b) => (a -> b, a, b, Int, String) -> TestTree
