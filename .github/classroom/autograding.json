@@ -318,7 +318,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest2",
@@ -328,7 +328,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest3",
@@ -338,7 +338,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest4",
@@ -348,7 +348,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest5",
@@ -358,7 +358,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest6",
@@ -368,7 +368,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest7",
@@ -378,7 +378,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest8",
@@ -388,7 +388,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest9",
@@ -398,7 +398,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest10",
@@ -408,7 +408,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 4
+      "points": 1.5
     },
     {
       "name": "3ctest11",
@@ -418,7 +418,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 5
+      "points": 2.5
     },
     {
       "name": "3ctest12",
@@ -428,7 +428,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 5
+      "points": 2.5
     },
     {
       "name": "3dtest1",
