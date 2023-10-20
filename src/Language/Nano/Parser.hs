@@ -10,7 +10,7 @@ import Control.Exception (Exception, throw)
 import Data.Text (Text, pack)
 import qualified Data.Text.IO as TIO (readFile)
 import Data.Void (Void)
-import Text.Megaparsec (Parsec, Stream, ShowErrorComponent, ParseErrorBundle, (<?>), empty, notFollowedBy, try, choice, sepBy, many, some, between, eof, runParser, parse, errorBundlePretty)
+import Text.Megaparsec (Parsec, VisualStream, TraversableStream, ShowErrorComponent, ParseErrorBundle, (<?>), empty, notFollowedBy, try, choice, sepBy, many, some, between, eof, runParser, parse, errorBundlePretty)
 import Text.Megaparsec.Char (alphaNumChar, letterChar, spaceChar, string)
 import qualified Text.Megaparsec.Char.Lexer as L
 
@@ -131,7 +131,7 @@ instance Show PrettyError where
   show (PrettyError str) = str
 instance Exception PrettyError
 
-handleError :: (Stream s, ShowErrorComponent e) => Either (ParseErrorBundle s e) Expr -> Expr
+handleError :: (VisualStream s, TraversableStream s, ShowErrorComponent e) => Either (ParseErrorBundle s e) Expr -> Expr
 handleError (Left err) = throw . PrettyError $ errorBundlePretty err
 handleError (Right ex) = ex
 
