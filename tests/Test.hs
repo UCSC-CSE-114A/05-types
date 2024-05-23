@@ -7,6 +7,7 @@ import qualified Language.Nano.Unify     as Nano
 import qualified Language.Nano.TypeCheck as Nano
 
 import Data.List (isInfixOf, sort, nub)
+import Data.Monoid (All(..), Any(..))
 import Language.Nano.Types (Type(..), Error(..))
 import Language.Nano.Unify (Constraint(..))
 
@@ -16,36 +17,36 @@ main = runTests [ unit ]
 unit :: Score -> TestTree
 unit sc = testGroup "NANO"
   [ -- 1a tests
-    scoreTest ( sort . nub . Nano.freeTVars
+    scoreTest ( ("a" `Nano.isFreeIn`)
               , TVar "a"
-              , ["a"]
+              , True
               , 1 -- points for this test case
-              , "freeTVars 1")
-  , scoreTest ( sort . nub . Nano.freeTVars
+              , "isFreeIn 1")
+  , scoreTest ( ("a" `Nano.isFreeIn`)
               , TList (TList (TVar "a"))
-              , ["a"]
+              , True
               , 1
-              , "freeTVars 2")
-  , scoreTest ( sort . nub . Nano.freeTVars
+              , "isFreeIn 2")
+  , scoreTest ( mconcat (map ((All .) . Nano.isFreeIn) ["a", "b"])
               , TVar "a" :=> TVar "b"
-              , ["a", "b"]
+              , All True
               , 1
-              , "freeTVars 3")
-  , scoreTest ( sort . nub . Nano.freeTVars
+              , "isFreeIn 3")
+  , scoreTest ( ("a" `Nano.isFreeIn`)
               , TVar "a" :=> TVar "a"
-              , ["a"]
+              , True
               , 1
-              , "freeTVars 4")
+              , "isFreeIn 4")
   -- , scoreTest ( Nano.freeTVars
   --             , (Nano.Forall "a" (Nano.Mono (TVar "a" :=> TVar "b")))
   --             , ["b"]
   --             , 1
   --             , "freeTVars 5")
-  , scoreTest ( sort . nub . Nano.freeTVars
+  , scoreTest ( mconcat (map ((Any .) . Nano.isFreeIn) ["a", "b", "c", "d"])
               , TInt
-              , []
+              , Any False
               , 1
-              , "freeTVars 6")
+              , "isFreeIn 6")
    -- , scoreTest ( Nano.freeTVars
    --            , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "a")))
    --            , []

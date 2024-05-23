@@ -3,10 +3,12 @@ module Language.Nano.Unify where
 import Language.Nano.Types
 
 infix 6 :~
+infix 6 `isFreeIn`
 
 
-freeTVars :: Type -> [String]
-freeTVars t = error "TBD: freeTVars"
+isFreeIn :: String -> Type -> Bool
+v `isFreeIn` t = error "TBD: isFreeIn"
+
 
 -- | Things that reference types in a type environment are substitutable:
 --   we can replace any reference to a type for its corresponding definition.
