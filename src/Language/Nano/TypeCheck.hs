@@ -1,171 +1,103 @@
-{-# LANGUAGE FlexibleInstances, OverloadedStrings, BangPatterns #-}
-
 module Language.Nano.TypeCheck where
 
+import Prelude hiding (and)
+
 import Language.Nano.Types
-import Language.Nano.Parser
+import Language.Nano.Parser (parseFile, parseString)
+import Language.Nano.Unify (Constraint(..), solve, substituteAll)
 
-import qualified Data.List as L
-import           Text.Printf (printf)  
-import           Control.Exception (throw)
+infixr 3 `and`
+infix  4 ~
 
---------------------------------------------------------------------------------
-typeOfFile :: FilePath -> IO Type
-typeOfFile f = parseFile f >>= typeOfExpr
 
-typeOfString :: String -> IO Type
-typeOfString s = typeOfExpr (parseString s)
+data FreshNames = Next Type FreshNames
+type Fresh a = FreshNames -> (a, FreshNames)
 
-typeOfExpr :: Expr -> IO Type
-typeOfExpr e = do
-  let (!st, t) = infer initInferState preludeTypes e
-  if (length (stSub st)) < 0 then throw (Error ("count Negative: " ++ show (stCnt st)))
-  else return t
+exists :: (Type -> Fresh [Constraint]) -> Fresh [Constraint]
+exists f freshes = error "TBD: exists"
 
---------------------------------------------------------------------------------
--- Problem 1: Warm-up
---------------------------------------------------------------------------------
+(~) :: Type -> Type -> Fresh [Constraint]
+(a ~ b) freshes = error "TBD: (~)"
 
--- | Things that have free type variables
-class HasTVars a where
-  freeTVars :: a -> [TVar]
+and :: Fresh [Constraint] -> Fresh [Constraint] -> Fresh [Constraint]
+(fc1 `and` fc2) freshes = error "TBD: and"
 
--- | Type variables of a type
-instance HasTVars Type where
-  freeTVars t     = error "TBD: type freeTVars"
 
--- | Free type variables of a poly-type (remove forall-bound vars)
-instance HasTVars Poly where
-  freeTVars s     = error "TBD: poly freeTVars"
+data Binding
+  = BoundVar Type
+  | BoundLet Expr BindEnv
+  | BoundPrim (Type -> Fresh [Constraint])
 
--- | Free type variables of a type environment
-instance HasTVars TypeEnv where
-  freeTVars gamma   = concat [freeTVars s | (x, s) <- gamma]  
-  
--- | Lookup a variable in the type environment  
-lookupVarType :: Id -> TypeEnv -> Poly
-lookupVarType x ((y, s) : gamma)
-  | x == y    = s
-  | otherwise = lookupVarType x gamma
-lookupVarType x [] = throw (Error ("unbound variable: " ++ x))
+-- | Binding environment: maps variables to their binding information.
+type BindEnv = [(Id, Binding)]
 
--- | Extend the type environment with a new biding
-extendTypeEnv :: Id -> Poly -> TypeEnv -> TypeEnv
-extendTypeEnv x s gamma = (x,s) : gamma  
-
--- | Lookup a type variable in a substitution;
---   if not present, return the variable unchanged
-lookupTVar :: TVar -> Subst -> Type
-lookupTVar a sub = error "TBD: lookupTVar"
-
--- | Remove a type variable from a substitution
-removeTVar :: TVar -> Subst -> Subst
-removeTVar a sub = error "TBD: removeTVar"
-     
--- | Things to which type substitutions can be apply
-class Substitutable a where
-  apply :: Subst -> a -> a
-  
--- | Apply substitution to type
-instance Substitutable Type where  
-  apply sub t         = error "TBD: type apply"
-
--- | Apply substitution to poly-type
-instance Substitutable Poly where    
-  apply sub s         = error "TBD: poly apply"
-
--- | Apply substitution to (all poly-types in) another substitution
-instance Substitutable Subst where  
-  apply sub to = zip keys $ map (apply sub) vals
-    where
-      (keys, vals) = unzip to
-      
--- | Apply substitution to a type environment
-instance Substitutable TypeEnv where  
-  apply sub gamma = zip keys $ map (apply sub) vals
-    where
-      (keys, vals) = unzip gamma
-      
--- | Extend substitution with a new type assignment
-extendSubst :: Subst -> TVar -> Type -> Subst
-extendSubst sub a t = error "TBD: extendSubst"
-      
---------------------------------------------------------------------------------
--- Problem 2: Unification
---------------------------------------------------------------------------------
-      
--- | State of the type inference algorithm      
-data InferState = InferState { 
-    stSub :: Subst -- ^ current substitution
-  , stCnt :: Int   -- ^ number of fresh type variables generated so far
-} deriving (Eq,Show)
-
--- | Initial state: empty substitution; 0 type variables
-initInferState = InferState [] 0
-
--- | Fresh type variable number n
-freshTV n = TVar $ "a" ++ show n      
-    
--- | Extend the current substitution of a state with a new type assignment   
-extendState :: InferState -> TVar -> Type -> InferState
-extendState (InferState sub n) a t = InferState (extendSubst sub a t) n
-        
--- | Unify a type variable with a type; 
---   if successful return an updated state, otherwise throw an error
-unifyTVar :: InferState -> TVar -> Type -> InferState
-unifyTVar st a t = error "TBD: unifyTVar"
-    
--- | Unify two types;
---   if successful return an updated state, otherwise throw an error
-unify :: InferState -> Type -> Type -> InferState
-unify st t1 t2 = error "TBD: unify"
-
---------------------------------------------------------------------------------
--- Problem 3: Type Inference
---------------------------------------------------------------------------------    
-  
-infer :: InferState -> TypeEnv -> Expr -> (InferState, Type)
-infer st _   (EInt _)          = error "TBD: infer EInt"
-infer st _   (EBool _)         = error "TBD: infer EBool"
-infer st gamma (EVar x)        = error "TBD: infer EVar"
-infer st gamma (ELam x body)   = error "TBD: infer ELam"
-infer st gamma (EApp e1 e2)    = error "TBD: infer EApp"
-infer st gamma (ELet x e1 e2)  = error "TBD: infer ELet"
-infer st gamma (EBin op e1 e2) = infer st gamma asApp
-  where
-    asApp = EApp (EApp opVar e1) e2
-    opVar = EVar (show op)
-infer st gamma (EIf c e1 e2) = infer st gamma asApp
-  where
-    asApp = EApp (EApp (EApp ifVar c) e1) e2
-    ifVar = EVar "if"    
-infer st gamma ENil = infer st gamma (EVar "[]")
-
--- | Generalize type variables inside a type
-generalize :: TypeEnv -> Type -> Poly
-generalize gamma t = error "TBD: generalize"
-    
--- | Instantiate a polymorphic type into a mono-type with fresh type variables
-instantiate :: Int -> Poly -> (Int, Type)
-instantiate n s = error "TBD: instantiate"
-      
--- | Types of built-in operators and functions      
-preludeTypes :: TypeEnv
+-- | Types of built-in operators and functions
+preludeTypes :: BindEnv
 preludeTypes =
-  [ ("+",    Mono $ TInt :=> TInt :=> TInt)
-  , ("-",    error "TBD: -")
-  , ("*",    error "TBD: *")
-  , ("/",    error "TBD: /")
-  , ("==",   error "TBD: ==")
-  , ("!=",   error "TBD: !=")
-  , ("<",    error "TBD: <")
-  , ("<=",   error "TBD: <=")
-  , ("&&",   error "TBD: &&")
-  , ("||",   error "TBD: ||")
+  -- "+" can be used at a type `t` if `t` is exactly `TInt :=> TInt :=> TInt`.
+  [ ("+",    BoundPrim (\t -> t ~ TInt :=> TInt :=> TInt))
+  , ("-",    error "TBD: (-)")
+  , ("*",    error "TBD: (*)")
+  , ("/",    error "TBD: (/)")
+  , ("<",    error "TBD: (<)")
+  , ("<=",   error "TBD: (<=)")
+  , ("&&",   error "TBD: (&&)")
+  , ("||",   error "TBD: (||)")
+  -- "==" can be used at a type `t` if there exists some type `a` such
+  -- that `t` is exactly `a :=> a :=> TBool`.
+  , ("==",   BoundPrim (\t -> exists (\a -> t ~ a :=> a :=> TBool)))
+  , ("!=",   error "TBD: (!=)")
   , ("if",   error "TBD: if")
-  -- lists: 
   , ("[]",   error "TBD: []")
-  , (":",    error "TBD: :")
+  , (":",    error "TBD: (:)")
   , ("head", error "TBD: head")
   , ("tail", error "TBD: tail")
   ]
+
+lookupBinding :: Id -> BindEnv -> (Id, Binding)
+lookupBinding v [] = error ("unbound variable `" ++ v ++ "`")
+lookupBinding v ((v', b) : bs)
+  | v == v'   = (v', b)
+  | otherwise = lookupBinding v bs
+
+-- | The invocation `check e env t` asks the question,
+-- | "What must hold true for `e` to be used at type `t` in environment `env`?"
+check :: Expr -> BindEnv -> Type -> Fresh [Constraint]
+check (EInt _) env t =
+  error "TBD: check EInt"
+check (EBool _) _env t =
+  error "TBD: check EBool"
+check (EVar v) env t =
+  checkBound (lookupBinding v env) t
+  where
+    checkBound :: (Id, Binding) -> Type -> Fresh [Constraint]
+    checkBound (v, b) t = error "TBD: checkBound"
+check (ELet v b a) env t =
+  error "TBD: check ELet"
+check (ELam v b) env t =
+  error "TBD: check ELam"
+check (EApp f a) env t =
+  error "TBD: check EApp"
+check (EBin op a b) env t =
+  check (EVar (show op) `appMany` [a, b]) env t
+check (EIf cond a b) env t =
+  check (EVar "if" `appMany` [cond, a, b]) env t
+check ENil env t =
+  check (EVar "[]") env t
+
+
+--------------------------------------------------------------------------------
+typeOfFile :: FilePath -> IO (Either Error Type)
+typeOfFile f = parseFile f >>= (return . typeOfExpr)
+
+typeOfString :: String -> Either Error Type
+typeOfString s = typeOfExpr (parseString s)
+
+typeOfExpr :: Expr -> Either Error Type
+typeOfExpr expr =
+  let Next ttop freshes = freshNames 0 in
+  let (cs, _) = check expr preludeTypes ttop freshes in
+  either Left (Right . flip substituteAll ttop) (solve cs)
+
+freshNames :: Int -> FreshNames
+freshNames n = Next (TVar ("a" ++ show n)) (freshNames (n + 1))

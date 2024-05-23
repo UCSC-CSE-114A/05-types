@@ -20,4 +20,4 @@ exec :: String -> IO ()
 exec s = (print =<< Nano.execString s) `catch` (putStr . Nano.errMsg)
 
 typeOf :: String -> IO ()
-typeOf s = (print =<< Nano.typeOfString s) `catch` (putStr . Nano.errMsg)
+typeOf s = (print $ Nano.typeOfString s) `catch` (putStr . Nano.errMsg)

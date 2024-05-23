@@ -9,8 +9,8 @@ import qualified Data.List as L
 import           Control.Exception
 import           Data.Typeable
 
-data Error = Error {errMsg :: String}
-             deriving (Show, Typeable)
+newtype Error = Error {errMsg :: String}
+  deriving (Eq, Show, Typeable)
 
 instance Exception Error
 
@@ -47,6 +47,10 @@ data Expr
   | ELam Id   Expr
   deriving (Eq)
 
+-- Convenience function to apply an n-ary function
+appMany :: Expr -> [Expr] -> Expr
+appMany = L.foldl' EApp
+
 data Value
   = VInt  Int
   | VBool Bool
@@ -56,7 +60,7 @@ data Value
   | VErr  String
   | VPrim (Value -> Value)
 
--- | Environment: maps variables to their values  
+-- | Environment: maps variables to their values
 type Env = [(Id, Value)]
 
 instance Eq Value where
@@ -65,43 +69,20 @@ instance Eq Value where
   VNil          == VNil          = True
   (VPair x1 y1) == (VPair x2 y2) = x1 == x2 && y1 == y2
   _             == _             = False
-  
-{- Types -}
 
-type TVar = String
+{- Types -}
 
 data Type
   = TInt             -- Int
   | TBool            -- Bool
   | Type :=> Type    -- T1 -> T2
-  | TVar TVar        -- a, b, c
   | TList Type       -- [T]
+  | TVar String      -- a, b, c
   deriving (Eq, Ord)
-  
-infixr 2 :=>
 
-instance IsString Type where
-  fromString = TVar
-  
-data Poly = Mono Type 
-          | Forall TVar Poly deriving Eq
-          
--- Convenience function to create a list type           
-list :: Type -> Type
-list = TList
+infixr 7 :=>
 
--- Convenience function to create a forall with one type parameter
-forall :: TVar -> Type -> Poly
-forall a t = Forall a $ Mono t          
-
--- | Type substitution: maps type variables to types
-type Subst = [(TVar, Type)]
-
-  
--- | Type environment: maps variables to their (poly-)types  
-type TypeEnv = [(Id, Poly)]  
-  
-{- Pretty printing -}  
+{- Pretty printing -}
 
 instance Show Binop where
   show = binopString
@@ -114,10 +95,7 @@ instance Show Expr where
 
 instance Show Type where
   show = typeString
-  
-instance Show Poly where
-  show = polyString
-  
+
 binopString :: Binop -> String
 binopString Plus  = "+"
 binopString Minus = "-"
@@ -162,10 +140,6 @@ typeString (TBool)      = "Bool"
 typeString (t1 :=> t2)  = printf "(%s) -> %s" (show t1) (show t2)
 typeString (TVar x)     = x
 typeString (TList t)    = printf "[%s]" (show t)
-
-polyString :: Poly -> String
-polyString (Mono t) = typeString t
-polyString (Forall a p) = "forall " ++ a ++ " . " ++ polyString p
 
 --------------------------------------------------------------------------------
 class Nano a where
