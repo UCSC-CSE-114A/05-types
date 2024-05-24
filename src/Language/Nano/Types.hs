@@ -72,12 +72,14 @@ instance Eq Value where
 
 {- Types -}
 
+type TyVar = String
+
 data Type
   = TInt             -- Int
   | TBool            -- Bool
   | Type :=> Type    -- T1 -> T2
   | TList Type       -- [T]
-  | TVar String      -- a, b, c
+  | TVar TyVar       -- a, b, c
   deriving (Eq, Ord)
 
 infixr 7 :=>

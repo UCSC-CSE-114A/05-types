@@ -17,36 +17,36 @@ main = runTests [ unit ]
 unit :: Score -> TestTree
 unit sc = testGroup "NANO"
   [ -- 1a tests
-    scoreTest ( ("a" `Nano.isFreeIn`)
+    scoreTest ( ("a" `Nano.occursIn`)
               , TVar "a"
               , True
               , 1 -- points for this test case
-              , "isFreeIn 1")
-  , scoreTest ( ("a" `Nano.isFreeIn`)
+              , "occursIn 1")
+  , scoreTest ( ("a" `Nano.occursIn`)
               , TList (TList (TVar "a"))
               , True
               , 1
-              , "isFreeIn 2")
-  , scoreTest ( mconcat (map ((All .) . Nano.isFreeIn) ["a", "b"])
+              , "occursIn 2")
+  , scoreTest ( mconcat (map ((All .) . Nano.occursIn) ["a", "b"])
               , TVar "a" :=> TVar "b"
               , All True
               , 1
-              , "isFreeIn 3")
-  , scoreTest ( ("a" `Nano.isFreeIn`)
+              , "occursIn 3")
+  , scoreTest ( ("a" `Nano.occursIn`)
               , TVar "a" :=> TVar "a"
               , True
               , 1
-              , "isFreeIn 4")
+              , "occursIn 4")
   -- , scoreTest ( Nano.freeTVars
   --             , (Nano.Forall "a" (Nano.Mono (TVar "a" :=> TVar "b")))
   --             , ["b"]
   --             , 1
   --             , "freeTVars 5")
-  , scoreTest ( mconcat (map ((Any .) . Nano.isFreeIn) ["a", "b", "c", "d"])
+  , scoreTest ( mconcat (map ((Any .) . Nano.occursIn) ["a", "b", "c", "d"])
               , TInt
               , Any False
               , 1
-              , "isFreeIn 6")
+              , "occursIn 6")
    -- , scoreTest ( Nano.freeTVars
    --            , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "a")))
    --            , []
