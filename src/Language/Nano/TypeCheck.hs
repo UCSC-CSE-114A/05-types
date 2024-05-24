@@ -25,14 +25,14 @@ and :: Fresh [Constraint] -> Fresh [Constraint] -> Fresh [Constraint]
 
 data Binding
   = BoundVar Type
-  | BoundLet Expr BindEnv
+  | BoundLet Expr TypeEnv
   | BoundPrim (Type -> Fresh [Constraint])
 
 -- | Binding environment: maps variables to their binding information.
-type BindEnv = [(Id, Binding)]
+type TypeEnv = [(Id, Binding)]
 
 -- | Types of built-in operators and functions
-preludeTypes :: BindEnv
+preludeTypes :: TypeEnv
 preludeTypes =
   -- "+" can be used at a type `t` if `t` is exactly `TInt :=> TInt :=> TInt`.
   [ ("+",    BoundPrim (\t -> t ~ TInt :=> TInt :=> TInt))
@@ -54,7 +54,7 @@ preludeTypes =
   , ("tail", error "TBD: tail")
   ]
 
-lookupBinding :: Id -> BindEnv -> (Id, Binding)
+lookupBinding :: Id -> TypeEnv -> (Id, Binding)
 lookupBinding v [] = error ("unbound variable `" ++ v ++ "`")
 lookupBinding v ((v', b) : bs)
   | v == v'   = (v', b)
@@ -62,7 +62,7 @@ lookupBinding v ((v', b) : bs)
 
 -- | The invocation `check e env t` asks the question,
 -- | "What must hold true for `e` to be used at type `t` in environment `env`?"
-check :: Expr -> BindEnv -> Type -> Fresh [Constraint]
+check :: Expr -> TypeEnv -> Type -> Fresh [Constraint]
 check (EInt _) env t =
   error "TBD: check EInt"
 check (EBool _) _env t =
