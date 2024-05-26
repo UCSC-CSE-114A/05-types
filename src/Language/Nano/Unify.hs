@@ -11,15 +11,9 @@ occursIn :: TyVar -> Type -> Bool
 v `occursIn` t = error "TBD: occursIn"
 
 
--- | Things that reference type definitions are substitutable:
---   we can replace any reference to a type with its corresponding definition.
-class Substitutable a where
-  substitute :: (TyVar, Type) -> a -> a
-
 -- | Substitute within a type
-instance Substitutable Type where
-  substitute :: (TyVar, Type) -> Type -> Type
-  substitute def t' = error "TBD: substitute"
+substituteOne :: (TyVar, Type) -> Type -> Type
+substituteOne def t' = error "TBD: substitute"
 
 
 -- | A `TypeDefs` is a sequence of type definitions,
@@ -30,8 +24,10 @@ instance Substitutable Type where
 --     [("b", TInt), ("a", TList (TVar "b"))]
 type TypeDefs = [(TyVar, Type)]
 
-substituteAll :: (Substitutable a) => TypeDefs -> a -> a
+substituteAll :: TypeDefs -> Type -> Type
 substituteAll defs t = error "TBD: substituteAll"
+
+
 
 -- | A `Constraint` is a pair of `Type`s that we want to "be the same".
 --   For instance, `TVar "a" :~ TBool` says that we want `TVar "a"`, a type variable,
@@ -41,6 +37,15 @@ substituteAll defs t = error "TBD: substituteAll"
 --   with integers that we can't do with booleans!
 data Constraint = Type :~ Type
   deriving (Show)
+
+-- | Things that reference type definitions are substitutable:
+--   we can replace any reference to a type with its corresponding definition.
+class Substitutable a where
+  substitute :: (TyVar, Type) -> a -> a
+
+instance Substitutable Type where
+  substitute :: (TyVar, Type) -> Type -> Type
+  substitute = substituteOne
 
 instance Substitutable Constraint where
   substitute :: (TyVar, Type) -> Constraint -> Constraint
