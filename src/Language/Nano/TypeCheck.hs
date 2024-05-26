@@ -11,13 +11,22 @@ infix  4 ~
 
 
 data FreshNames = Next Type FreshNames
-type Fresh a = FreshNames -> (a, FreshNames)
 
-exists :: (Type -> Fresh [Constraint]) -> Fresh [Constraint]
-exists f freshes = error "TBD: exists"
+instance Show FreshNames where
+  show freshes = "<" ++ showFreshes 3 freshes ++ ">"
+    where
+      showFreshes :: Int -> FreshNames -> String
+      showFreshes 0 freshes = "..."
+      showFreshes n (Next t freshes) = show t ++ "," ++ showFreshes (n - 1) freshes
+
+
+type Fresh a = FreshNames -> (a, FreshNames)
 
 (~) :: Type -> Type -> Fresh [Constraint]
 (a ~ b) freshes = error "TBD: (~)"
+
+exists :: (Type -> Fresh [Constraint]) -> Fresh [Constraint]
+exists f freshes = error "TBD: exists"
 
 and :: Fresh [Constraint] -> Fresh [Constraint] -> Fresh [Constraint]
 (fc1 `and` fc2) freshes = error "TBD: and"
@@ -97,7 +106,19 @@ typeOfExpr :: Expr -> Either Error Type
 typeOfExpr expr =
   let Next ttop freshes = freshNames 0 in
   let (cs, _) = check expr preludeTypes ttop freshes in
-  either Left (Right . flip substituteAll ttop) (solve cs)
+  case solve cs of
+    Left  err -> Left err
+    Right defs -> Right (substituteAll defs ttop)
 
 freshNames :: Int -> FreshNames
 freshNames n = Next (TVar ("a" ++ show n)) (freshNames (n + 1))
+
+runFresh :: Fresh a -> a
+runFresh f = a
+  where
+    (a, _) = f (freshNames 0)
+
+getPrimitive :: Id -> BindEnv -> (Type -> Fresh [Constraint])
+getPrimitive v env = f
+  where
+    (_, BoundPrim f) = lookupBinding v env
