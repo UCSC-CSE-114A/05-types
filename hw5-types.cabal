@@ -1,10 +1,10 @@
 name:                hw5-types
 version:             0.1.0.0
-synopsis:            Starter code for cse130 homework/05-types
+synopsis:            Starter code for CSE114A homework 05-types
 license:             MIT
 license-file:        LICENSE
 author:              Nadia Polikarpova
-maintainer:          npolikarpova@eng.ucsd.edu
+maintainer:          CSE114A Course Staff
 category:            Language
 build-type:          Simple
 extra-source-files:  README.md
