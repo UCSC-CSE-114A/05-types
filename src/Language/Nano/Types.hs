@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Language.Nano.Types where
 
@@ -33,6 +34,7 @@ data Binop
 type Id = String
 
 instance IsString Expr where
+  fromString :: String -> Expr
   fromString = EVar
 
 data Expr
@@ -60,6 +62,7 @@ data Value
 type Env = [(Id, Value)]
 
 instance Eq Value where
+  (==) :: Value -> Value -> Bool
   (VInt x1)     == (VInt x2)     = x1 == x2
   (VBool x1)    == (VBool x2)    = x1 == x2
   VNil          == VNil          = True
@@ -68,34 +71,36 @@ instance Eq Value where
   
 {- Types -}
 
-type TVar = String
+type TId = String
 
 data Type
   = TInt             -- Int
   | TBool            -- Bool
   | Type :=> Type    -- T1 -> T2
-  | TVar TVar        -- a, b, c
+  | TVar TId        -- a, b, c
   | TList Type       -- [T]
   deriving (Eq, Ord)
   
 infixr 2 :=>
 
 instance IsString Type where
+  fromString :: String -> Type
   fromString = TVar
   
 data Poly = Mono Type 
-          | Forall TVar Poly deriving Eq
+          | Forall TId Poly
+          deriving Eq
           
 -- Convenience function to create a list type           
 list :: Type -> Type
 list = TList
 
 -- Convenience function to create a forall with one type parameter
-forall :: TVar -> Type -> Poly
+forall :: TId -> Type -> Poly
 forall a t = Forall a $ Mono t          
 
 -- | Type substitution: maps type variables to types
-type Subst = [(TVar, Type)]
+type Subst = [(TId, Type)]
 
   
 -- | Type environment: maps variables to their (poly-)types  
@@ -104,18 +109,23 @@ type TypeEnv = [(Id, Poly)]
 {- Pretty printing -}  
 
 instance Show Binop where
+  show :: Binop -> String
   show = binopString
 
 instance Show Value where
+  show :: Value -> String
   show = valueString
 
 instance Show Expr where
+  show :: Expr -> String
   show = exprString
 
 instance Show Type where
+  show :: Type -> String
   show = typeString
   
 instance Show Poly where
+  show :: Poly -> String
   show = polyString
   
 binopString :: Binop -> String
@@ -173,11 +183,15 @@ class Nano a where
   value :: a -> Value
 
 instance Nano Int where
+  expr :: Int -> Expr
   expr  = EInt
+  value :: Int -> Value
   value = VInt
 
 instance Nano Bool where
+  expr :: Bool -> Expr
   expr  = EBool
+  value :: Bool -> Value
   value = VBool
 
 exprList :: [Expr] -> Expr

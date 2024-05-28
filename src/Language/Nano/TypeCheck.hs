@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances, OverloadedStrings, BangPatterns #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Language.Nano.TypeCheck where
 
@@ -28,66 +29,73 @@ typeOfExpr e = do
 
 -- | Things that have free type variables
 class HasTVars a where
-  freeTVars :: a -> [TVar]
+  freeTVars :: a -> [TId]
 
 -- | Type variables of a type
 instance HasTVars Type where
+  freeTVars :: Type -> [TId]
   freeTVars t     = error "TBD: type freeTVars"
 
 -- | Free type variables of a poly-type (remove forall-bound vars)
 instance HasTVars Poly where
+  freeTVars :: Poly -> [TId]
   freeTVars s     = error "TBD: poly freeTVars"
 
 -- | Free type variables of a type environment
 instance HasTVars TypeEnv where
+  freeTVars :: TypeEnv -> [TId]
   freeTVars gamma   = concat [freeTVars s | (x, s) <- gamma]  
   
--- | Lookup a variable in the type environment  
+-- | Look up a variable in a type environment
 lookupVarType :: Id -> TypeEnv -> Poly
 lookupVarType x ((y, s) : gamma)
   | x == y    = s
   | otherwise = lookupVarType x gamma
 lookupVarType x [] = throw (Error ("unbound variable: " ++ x))
 
--- | Extend the type environment with a new biding
+-- | Extend a type environment with a new binding
 extendTypeEnv :: Id -> Poly -> TypeEnv -> TypeEnv
 extendTypeEnv x s gamma = (x,s) : gamma  
 
--- | Lookup a type variable in a substitution;
+-- | Look up a type variable in a substitution;
 --   if not present, return the variable unchanged
-lookupTVar :: TVar -> Subst -> Type
+lookupTVar :: TId -> Subst -> Type
 lookupTVar a sub = error "TBD: lookupTVar"
 
 -- | Remove a type variable from a substitution
-removeTVar :: TVar -> Subst -> Subst
+removeTVar :: TId -> Subst -> Subst
 removeTVar a sub = error "TBD: removeTVar"
      
--- | Things to which type substitutions can be apply
+-- | Things to which type substitutions can be applied
 class Substitutable a where
   apply :: Subst -> a -> a
   
 -- | Apply substitution to type
 instance Substitutable Type where  
+  apply :: Subst -> Type -> Type
   apply sub t         = error "TBD: type apply"
 
 -- | Apply substitution to poly-type
 instance Substitutable Poly where    
+  apply :: Subst -> Poly -> Poly
   apply sub s         = error "TBD: poly apply"
 
 -- | Apply substitution to (all poly-types in) another substitution
 instance Substitutable Subst where  
-  apply sub to = zip keys $ map (apply sub) vals
+  apply :: Subst -> Subst -> Subst
+  apply sub to = zip keys (map (apply sub) vals)
     where
       (keys, vals) = unzip to
       
 -- | Apply substitution to a type environment
 instance Substitutable TypeEnv where  
-  apply sub gamma = zip keys $ map (apply sub) vals
+  apply :: Subst -> TypeEnv -> TypeEnv
+  apply sub gamma = zip keys (map (apply sub) vals)
     where
       (keys, vals) = unzip gamma
       
 -- | Extend substitution with a new type assignment
-extendSubst :: Subst -> TVar -> Type -> Subst
+extendSubst :: Subst -> TId -> Type -> Subst
 extendSubst sub a t = error "TBD: extendSubst"
       
 --------------------------------------------------------------------------------
@@ -104,15 +112,15 @@ data InferState = InferState {
 initInferState = InferState [] 0
 
 -- | Fresh type variable number n
-freshTV n = TVar $ "a" ++ show n      
+freshTV n = TVar ("a" ++ show n)
     
 -- | Extend the current substitution of a state with a new type assignment   
-extendState :: InferState -> TVar -> Type -> InferState
+extendState :: InferState -> TId -> Type -> InferState
 extendState (InferState sub n) a t = InferState (extendSubst sub a t) n
         
 -- | Unify a type variable with a type; 
 --   if successful return an updated state, otherwise throw an error
-unifyTVar :: InferState -> TVar -> Type -> InferState
+unifyTVar :: InferState -> TId -> Type -> InferState
 unifyTVar st a t = error "TBD: unifyTVar"
     
 -- | Unify two types;
