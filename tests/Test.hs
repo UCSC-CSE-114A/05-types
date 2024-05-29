@@ -47,12 +47,12 @@ unit sc = testGroup "NANO"
               , []
               , 1
               , "freeTVars 6")
-   , scoreTest ( Nano.freeTVars
+  , scoreTest ( Nano.freeTVars
               , (Nano.Forall "a" (Nano.Mono (Nano.TVar "a" :=> Nano.TVar "a")))
               , []
               , 1
               , "freeTVars 7")
-     , scoreTest ( Nano.freeTVars
+  , scoreTest ( Nano.freeTVars
               , (Nano.Forall "a" (Nano.Mono (Nano.TBool :=> Nano.TBool)))
               , []
               , 1
