@@ -160,7 +160,7 @@ instantiate n s = error "TBD: instantiate"
 -- | Types of built-in operators and functions      
 preludeTypes :: TypeEnv
 preludeTypes =
-  [ ("+",    Mono $ TInt :=> TInt :=> TInt)
+  [ ("+",    Mono (TInt :=> TInt :=> TInt))
   , ("-",    error "TBD: -")
   , ("*",    error "TBD: *")
   , ("/",    error "TBD: /")
