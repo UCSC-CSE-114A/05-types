@@ -102,7 +102,7 @@
     },
     {
       "name": "part 1b -- lookupTVar -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- lookupTVar -- test3\"'",
+      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- lookupTVar -- test 3\"'",
       "setup": "",
       "input": "",
       "output": "",
@@ -132,7 +132,7 @@
     },
     {
       "name": "part 1b -- removeTVar -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- removeTVar -- test3\"'",
+      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- removeTVar -- test 3\"'",
       "setup": "",
       "input": "",
       "output": "",
@@ -162,7 +162,7 @@
     },
     {
       "name": "part 1b -- apply -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test3\"'",
+      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test 3\"'",
       "setup": "",
       "input": "",
       "output": "",
@@ -212,7 +212,7 @@
     },
     {
       "name": "part 1b -- extendSubst -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test3\"'",
+      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test 3\"'",
       "setup": "",
       "input": "",
       "output": "",

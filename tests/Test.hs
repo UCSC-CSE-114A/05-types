@@ -57,18 +57,18 @@ unit sc = testGroup "NANO"
               , []
               , 1
               , "freeTVars 8")
-   -- 1b tests
-   , scoreTest ( uncurry Nano.lookupTVar
+  -- 1b tests
+  , scoreTest ( uncurry Nano.lookupTVar
                , ("a", [("a", TInt)])
                , TInt
                , 1 
                , "part 1b -- lookupTVar -- test 1" ) 
-   , scoreTest ( uncurry Nano.lookupTVar
+  , scoreTest ( uncurry Nano.lookupTVar
                , ("g", [("g", TBool), ("a", TInt)])
                , TBool
                , 1 
                , "part 1b -- lookupTVar -- test 2" )
-   , scoreTest ( uncurry Nano.lookupTVar
+  , scoreTest ( uncurry Nano.lookupTVar
                , ("a", [("g", TBool)])
                , (TVar "a")
                , 1 
@@ -93,7 +93,7 @@ unit sc = testGroup "NANO"
                , TList (TInt)
                , 1 
                , "part 1b -- apply -- test 1" )
-    , scoreTest ( Nano.apply [("a", TInt)]
+  , scoreTest ( Nano.apply [("a", TInt)]
                , TList (TVar "b")
                , TList (TVar "b")
                , 1 
@@ -138,8 +138,8 @@ unit sc = testGroup "NANO"
                , [("b", TBool), ("a", TList TBool), ("c", TBool)]
                , 1
                , "part 1b -- extendSubst -- test 5" )
-   -- 2a tests
-   , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
+  -- 2a tests
+  , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("a", Nano.TInt)
               , [("a", Nano.TInt)]
               , 1
