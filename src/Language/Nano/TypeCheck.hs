@@ -155,7 +155,11 @@ generalize gamma t = error "TBD: generalize"
     
 -- | Instantiate a polymorphic type into a mono-type with fresh type variables
 instantiate :: Int -> Poly -> (Int, Type)
-instantiate n s = error "TBD: instantiate"
+instantiate n s = helper n [] s
+  where
+    helper :: Int -> Subst -> Poly -> (Int, Type)
+    helper n sub (Mono t)     = (n, apply sub t)
+    helper n sub (Forall a s) = helper (n + 1) ((a, freshTV n):sub) s
       
 -- | Types of built-in operators and functions      
 preludeTypes :: TypeEnv

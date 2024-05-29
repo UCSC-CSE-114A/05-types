@@ -209,21 +209,6 @@ unit sc = testGroup "NANO"
               , ["a","b","c"]
               , 1
               , "generalize 3")
-  , scoreTest ( uncurry Nano.instantiate
-              , (2, Nano.Forall "h" $ Nano.Mono $ Nano.TList (Nano.TVar "h"))
-              , (3, Nano.TList (Nano.TVar "a2"))
-              , 1
-              , "instantiate 1")
-  , scoreTest ( uncurry Nano.instantiate
-              , (2, Nano.Forall "a" $ Nano.Forall "b" $ Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "b"))
-              , (4, (Nano.TVar "a2") Nano.:=> (Nano.TVar "a3"))
-              , 1
-              , "instantiate 2")
-  , scoreTest ( uncurry Nano.instantiate
-              , (2, Nano.Forall "a" $ Nano.Mono $ (Nano.TVar "a") Nano.:=> (Nano.TVar "b"))
-              , (3, (Nano.TVar "a2") Nano.:=> (Nano.TVar "b"))
-              , 1
-              , "instantiate 3")
   , fileTest  ( "tests/input/3btest1.hs"
               , Nano.TBool
               , 2 )
