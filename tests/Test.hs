@@ -61,83 +61,83 @@ unit sc = testGroup "NANO"
   , scoreTest ( uncurry Nano.lookupTVar
                , ("a", [("a", TInt)])
                , TInt
-               , 1 
-               , "part 1b -- lookupTVar -- test 1" ) 
+               , 1
+               , "lookupTVar 1" )
   , scoreTest ( uncurry Nano.lookupTVar
                , ("g", [("g", TBool), ("a", TInt)])
                , TBool
-               , 1 
-               , "part 1b -- lookupTVar -- test 2" )
+               , 1
+               , "lookupTVar 2" )
   , scoreTest ( uncurry Nano.lookupTVar
                , ("a", [("g", TBool)])
                , (TVar "a")
-               , 1 
-               , "part 1b -- lookupTVar -- test 3" )
+               , 1
+               , "lookupTVar 3" )
   , scoreTest ( uncurry Nano.removeTVar
                , ("a",[("a", TInt)])
                , []
                , 1
-               , "part 1b -- removeTVar -- test 1" )
+               , "removeTVar 1" )
   , scoreTest ( uncurry Nano.removeTVar
                , ("a",[("a", TInt), ("b", TBool)])
                , [("b", TBool)]
                , 1
-               , "part 1b -- removeTVar -- test 2" )
+               , "removeTVar 2" )
   , scoreTest ( uncurry Nano.removeTVar
                , ("a",[("b", TBool)])
                , [("b", TBool)]
                , 1
-               , "part 1b -- removeTVar -- test 3" )
+               , "removeTVar 3" )
   , scoreTest ( Nano.apply [("a", TInt)]
                , TList (TVar "a")
                , TList (TInt)
-               , 1 
-               , "part 1b -- apply -- test 1" )
+               , 1
+               , "apply 1" )
   , scoreTest ( Nano.apply [("a", TInt)]
                , TList (TVar "b")
                , TList (TVar "b")
-               , 1 
-               , "part 1b -- apply -- test 2" )
+               , 1
+               , "apply 2" )
   , scoreTest ( Nano.apply [("a", TList (TInt)), ("b", TInt)]
                , TVar "b" :=> TVar "a"
                , TInt :=> TList (TInt)
-               , 1 
-               , "part 1b -- apply -- test 3" )
+               , 1
+               , "apply 3" )
   , scoreTest ( Nano.apply [("a", TInt)]
                , Nano.forall "a" (Nano.list "a")
                , Nano.forall "a" (Nano.list "a")
-               , 1 
-               , "part 1b -- apply -- test 4" )
+               , 1
+               , "apply 4" )
   , scoreTest ( Nano.apply [("b", TInt)]
                , Nano.forall "a" ("a" :=> "b")
                , Nano.forall "a" ("a" :=> TInt)
-               , 1 
-               , "part 1b -- apply -- test 5" )
+               , 1
+               , "apply 5" )
   , scoreTest ( uncurry (Nano.extendSubst [])
                , ("b", TBool)
                , [("b", TBool)]
                , 1
-               , "part 1b -- extendSubst -- test 1" )
+               , "extendSubst 1" )
   , scoreTest ( uncurry (Nano.extendSubst [("a", TInt)])
                , ("b", TBool)
                , [("b", TBool), ("a", TInt)]
                , 1
-               , "part 1b -- extendSubst -- test 2" )
+               , "extendSubst 2" )
   , scoreTest ( uncurry (Nano.extendSubst [("a", TInt)])
                , ("b", (TList (TVar "a")))
                , [("b", TList (TInt)), ("a", TInt)]
                , 1
-               , "part 1b -- extendSubst -- test 3" )
+               , "extendSubst 3" )
   , scoreTest ( uncurry (Nano.extendSubst [("a", TList (TVar "b"))])
                , ("b", TBool)
                , [("b", TBool), ("a", TList TBool)]
                , 1
-               , "part 1b -- extendSubst -- test 4" )
+               , "extendSubst 4" )
   , scoreTest ( uncurry (Nano.extendSubst [("a", TList (TVar "b")), ("c", TVar "b")])
                , ("b", TBool)
                , [("b", TBool), ("a", TList TBool), ("c", TBool)]
                , 1
-               , "part 1b -- extendSubst -- test 5" )
+               , "extendSubst 5" )
   -- 2a tests
   , scoreTest ( Nano.stSub . uncurry (Nano.unifyTVar Nano.initInferState)
               , ("a", Nano.TInt)
@@ -261,10 +261,10 @@ unit sc = testGroup "NANO"
               , 2 )
   , fileTestE  ( "tests/input/3dtest3.hs"
               , "type error"
-              , 2 )                            
+              , 2 )
   , fileTestE  ( "tests/input/3dtest4.hs"
               , "type error"
-              , 3 )                            
+              , 3 )
   , fileTestE  ( "tests/input/3dtest5.hs"
               , "type error"
               , 3 )
