@@ -1,584 +1,606 @@
 {
-  "tests": [
-    {
-      "name": "freeTVars 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 4",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 5",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 5\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 6",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 6\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 7",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 7\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "freeTVars 8",
-      "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 8\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "part 1b -- lookupTVar -- test 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- lookupTVar -- test 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- lookupTVar -- test 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- lookupTVar -- test 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- lookupTVar -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- lookupTVar -- test 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- removeTVar -- test 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- removeTVar -- test 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- removeTVar -- test 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- removeTVar -- test 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- removeTVar -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- removeTVar -- test 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- apply -- test 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- apply -- test 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- apply -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- apply -- test 4",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test 4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- apply -- test 5",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- apply -- test 5\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- extendSubst -- test 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- extendSubst -- test 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- extendSubst -- test 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- extendSubst -- test 4",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test 4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "part 1b -- extendSubst -- test 5",
-      "run": "stack test --allow-different-user --ta '--pattern \"part 1b -- extendSubst -- test 5\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 3.125
-    },
-    {
-      "name": "unifyTVar 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "unifyTVar 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "unifyTVar 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "unifyTVar 4",
-      "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "unify 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"unify 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 7.5
-    },
-    {
-      "name": "unify 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"unify 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 7.5
-    },
-    {
-      "name": "unify 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"unify 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 7.5
-    },
-    {
-      "name": "unify 4",
-      "run": "stack test --allow-different-user --ta '--pattern \"unify 4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 7.5
-    },
-    {
-      "name": "3atest1",
-      "run": "stack test --allow-different-user --ta '--pattern \"3atest1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "3atest2",
-      "run": "stack test --allow-different-user --ta '--pattern \"3atest2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "3atest3",
-      "run": "stack test --allow-different-user --ta '--pattern \"3atest3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "3atest4",
-      "run": "stack test --allow-different-user --ta '--pattern \"3atest4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 5
-    },
-    {
-      "name": "generalize 1",
-      "run": "stack test --allow-different-user --ta '--pattern \"generalize 1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 4
-    },
-    {
-      "name": "generalize 2",
-      "run": "stack test --allow-different-user --ta '--pattern \"generalize 2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 4
-    },
-    {
-      "name": "generalize 3",
-      "run": "stack test --allow-different-user --ta '--pattern \"generalize 3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 4
-    },
-    {
-      "name": "3btest1",
-      "run": "stack test --allow-different-user --ta '--pattern \"3btest1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 4
-    },
-    {
-      "name": "3btest2",
-      "run": "stack test --allow-different-user --ta '--pattern \"3btest2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 4
-    },
-    {
-      "name": "3ctest1",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest2",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest3",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest4",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest5",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest5\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest6",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest6\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest7",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest7\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest8",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest8\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest9",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest9\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest10",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest10\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 1.5
-    },
-    {
-      "name": "3ctest11",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest11\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "3ctest12",
-      "run": "stack test --allow-different-user --ta '--pattern \"3ctest12\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 2.5
-    },
-    {
-      "name": "3dtest1",
-      "run": "stack test --allow-different-user --ta '--pattern \"3dtest1\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 6
-    },
-    {
-      "name": "3dtest2",
-      "run": "stack test --allow-different-user --ta '--pattern \"3dtest2\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 6
-    },
-    {
-      "name": "3dtest3",
-      "run": "stack test --allow-different-user --ta '--pattern \"3dtest3\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 6
-    },
-    {
-      "name": "3dtest4",
-      "run": "stack test --allow-different-user --ta '--pattern \"3dtest4\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 6
-    },
-    {
-      "name": "3dtest5",
-      "run": "stack test --allow-different-user --ta '--pattern \"3dtest5\"'",
-      "setup": "",
-      "input": "",
-      "output": "",
-      "comparison": "included",
-      "timeout": 10,
-      "points": 6
-    }
-  ]
+    "tests": [
+        {
+            "name": "INTEGRITY.md",
+            "run": "test -f ./INTEGRITY.md",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 0,
+            "stop-on-fail": true
+        },
+        {
+            "name": "Build Check",
+            "run": "stack build --test --no-run-tests",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 60,
+            "points": 0,
+            "stop-on-fail": true
+        },
+        {
+            "name": "freeTVars 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 4",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 5",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 5\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 6",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 6\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 7",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 7\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "freeTVars 8",
+            "run": "stack test --allow-different-user --ta '--pattern \"freeTVars 8\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "lookupTVar 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"lookupTVar 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "lookupTVar 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"lookupTVar 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "lookupTVar 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"lookupTVar 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "removeTVar 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"removeTVar 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "removeTVar 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"removeTVar 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "removeTVar 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"removeTVar 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "apply 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"apply 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "apply 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"apply 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "apply 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"apply 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "apply 4",
+            "run": "stack test --allow-different-user --ta '--pattern \"apply 4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "apply 5",
+            "run": "stack test --allow-different-user --ta '--pattern \"apply 5\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "extendSubst 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"extendSubst 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "extendSubst 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"extendSubst 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "extendSubst 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"extendSubst 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "extendSubst 4",
+            "run": "stack test --allow-different-user --ta '--pattern \"extendSubst 4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "extendSubst 5",
+            "run": "stack test --allow-different-user --ta '--pattern \"extendSubst 5\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 3.125
+        },
+        {
+            "name": "unifyTVar 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "unifyTVar 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "unifyTVar 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "unifyTVar 4",
+            "run": "stack test --allow-different-user --ta '--pattern \"unifyTVar 4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "unify 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"unify 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 7.5
+        },
+        {
+            "name": "unify 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"unify 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 7.5
+        },
+        {
+            "name": "unify 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"unify 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 7.5
+        },
+        {
+            "name": "unify 4",
+            "run": "stack test --allow-different-user --ta '--pattern \"unify 4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 7.5
+        },
+        {
+            "name": "3atest1",
+            "run": "stack test --allow-different-user --ta '--pattern \"3atest1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "3atest2",
+            "run": "stack test --allow-different-user --ta '--pattern \"3atest2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "3atest3",
+            "run": "stack test --allow-different-user --ta '--pattern \"3atest3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "3atest4",
+            "run": "stack test --allow-different-user --ta '--pattern \"3atest4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 5
+        },
+        {
+            "name": "generalize 1",
+            "run": "stack test --allow-different-user --ta '--pattern \"generalize 1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 4
+        },
+        {
+            "name": "generalize 2",
+            "run": "stack test --allow-different-user --ta '--pattern \"generalize 2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 4
+        },
+        {
+            "name": "generalize 3",
+            "run": "stack test --allow-different-user --ta '--pattern \"generalize 3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 4
+        },
+        {
+            "name": "3btest1",
+            "run": "stack test --allow-different-user --ta '--pattern \"3btest1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 4
+        },
+        {
+            "name": "3btest2",
+            "run": "stack test --allow-different-user --ta '--pattern \"3btest2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 4
+        },
+        {
+            "name": "3ctest01",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest01\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest02",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest02\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest03",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest03\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest04",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest04\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest05",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest05\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest06",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest06\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest07",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest07\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest08",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest08\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest09",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest09\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest10",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest10\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 1.5
+        },
+        {
+            "name": "3ctest11",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest11\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "3ctest12",
+            "run": "stack test --allow-different-user --ta '--pattern \"3ctest12\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 2.5
+        },
+        {
+            "name": "3dtest1",
+            "run": "stack test --allow-different-user --ta '--pattern \"3dtest1\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 6
+        },
+        {
+            "name": "3dtest2",
+            "run": "stack test --allow-different-user --ta '--pattern \"3dtest2\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 6
+        },
+        {
+            "name": "3dtest3",
+            "run": "stack test --allow-different-user --ta '--pattern \"3dtest3\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 6
+        },
+        {
+            "name": "3dtest4",
+            "run": "stack test --allow-different-user --ta '--pattern \"3dtest4\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 6
+        },
+        {
+            "name": "3dtest5",
+            "run": "stack test --allow-different-user --ta '--pattern \"3dtest5\"'",
+            "setup": "",
+            "input": "",
+            "output": "",
+            "comparison": "included",
+            "timeout": 10,
+            "points": 6
+        }
+    ]
 }
